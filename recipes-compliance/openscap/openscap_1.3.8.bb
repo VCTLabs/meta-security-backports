@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
 LICENSE = "LGPL-2.1-only"
 
 DEPENDS = "dbus acl bzip2 pkgconfig gconf procps curl libxml2 libxslt libcap swig libpcre  xmlsec1"
-DEPENDS:class-native = "pkgconfig-native swig-native curl-native libxml2-native libxslt-native libcap-native libpcre-native xmlsec1-native"
+DEPENDS_class-native = "pkgconfig-native swig-native curl-native libxml2-native libxslt-native libcap-native libpcre-native xmlsec1-native"
 
 #Jun 22th, 2023
 SRCREV = "a81c66d9bc36612dd1ca83a8c959a59e172eb4b9"
@@ -40,13 +40,13 @@ EXTRA_OECMAKE += "-DENABLE_PROBES_LINUX=ON -DENABLE_PROBES_UNIX=ON \
 STAGING_OSCAP_DIR = "${TMPDIR}/work-shared/${MACHINE}/oscap-source"
 STAGING_OSCAP_BUILDDIR = "${TMPDIR}/work-shared/openscap/oscap-build-artifacts"
 
-do_configure:append:class-native () {
+do_configure_append_class-native () {
     sed -i 's:OSCAP_DEFAULT_CPE_PATH.*$:OSCAP_DEFAULT_CPE_PATH "${STAGING_OSCAP_BUILDDIR}${datadir_native}/openscap/cpe":' ${B}/config.h
     sed -i 's:OSCAP_DEFAULT_SCHEMA_PATH.*$:OSCAP_DEFAULT_SCHEMA_PATH "${STAGING_OSCAP_BUILDDIR}${datadir_native}/openscap/schemas":' ${B}/config.h
     sed -i 's:OSCAP_DEFAULT_XSLT_PATH.*$:OSCAP_DEFAULT_XSLT_PATH "${STAGING_OSCAP_BUILDDIR}${datadir_native}/openscap/xsl":' ${B}/config.h
 }
 
-do_install:append () {
+do_install_append () {
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         if ${@bb.utils.contains('PACKAGECONFIG','remdediate_service','true','false',d)}; then
             install -D -m 0644 ${B}/oscap-remediate.service ${D}${systemd_system_unitdir}/oscap-remediate.service
@@ -54,8 +54,8 @@ do_install:append () {
     fi
 }
 
-do_install:class-native[cleandirs] += " ${STAGING_OSCAP_BUILDDIR}"
-do_install:append:class-native () {
+do_install_class-native[cleandirs] += " ${STAGING_OSCAP_BUILDDIR}"
+do_install_append_class-native () {
     oscapdir=${STAGING_OSCAP_BUILDDIR}/${datadir_native}
     install -d $oscapdir
     cp -a ${D}/${STAGING_DATADIR_NATIVE}/openscap $oscapdir
@@ -63,13 +63,13 @@ do_install:append:class-native () {
 
 
 SYSTEMD_PACKAGES = "${PN}"
-SYSTEMD_SERVICE:${PN} = "${@bb.utils.contains('PACKAGECONFIG','remdediate_service', 'oscap-remediate.service', '',d)}"
+SYSTEMD_SERVICE_${PN} = "${@bb.utils.contains('PACKAGECONFIG','remdediate_service', 'oscap-remediate.service', '',d)}"
 SYSTEMD_AUTO_ENABLE = "disable"
 
 
-FILES:${PN} += "${PYTHON_SITEPACKAGES_DIR}"
+FILES_${PN} += "${PYTHON_SITEPACKAGES_DIR}"
 
 
-RDEPENDS:${PN} = "libxml2 python3-core libgcc bash"
-RDEPENDS:${PN}-class-target = "libxml2 python3-core libgcc bash os-release"
+RDEPENDS_${PN} = "libxml2 python3-core libgcc bash"
+RDEPENDS_${PN}-class-target = "libxml2 python3-core libgcc bash os-release"
 BBCLASSEXTEND = "native"
