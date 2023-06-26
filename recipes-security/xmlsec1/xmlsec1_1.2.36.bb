@@ -20,18 +20,18 @@ SRC_URI = "http://www.aleksey.com/xmlsec/download/${BP}.tar.gz \
     file://run-ptest \
     "
 
-SRC_URI[md5sum] = "69b8d95c009a404462e19f335e650241"
-SRC_URI[sha256sum] = "13eec4811ea30e3f0e16a734d1dbf7f9d246a71d540b48d143a07b489f6222d4"
+SRC_URI[md5sum] = "73e147fc387d816d26a48d7db76563ed"
+SRC_URI[sha256sum] = "f0d97e008b211d85808f038326d42e7f5cf46648e176f07406a323e7e8d41c80"
 
 inherit autotools-brokensep ptest pkgconfig
 
-CFLAGS += "-I${STAGING_INCDIR}/nspr4 -I${STAGING_INCDIR}/nss3"
-CPPFLAGS += "-I${STAGING_INCDIR}/nspr4 -I${STAGING_INCDIR}/nss3"
+CFLAGS += "-I${STAGING_INCDIR}/nspr -I${STAGING_INCDIR}/nss3"
+CPPFLAGS += "-I${STAGING_INCDIR}/nspr -I${STAGING_INCDIR}/nss3"
 
 PACKAGECONFIG ??= "gnutls libgcrypt nss openssl des"
 PACKAGECONFIG[gnutls] = ",,gnutls"
 PACKAGECONFIG[libgcrypt] = ",,libgcrypt"
-PACKAGECONFIG[nss] = "--with-nss=${STAGING_LIBDIR}/../.. --with-nspr=${STAGING_LIBDIR}/../..,,nss nspr"
+PACKAGECONFIG[nss] = ",,nss nspr"
 PACKAGECONFIG[openssl] = ",,openssl"
 PACKAGECONFIG[des] = ",--disable-des,,"
 
