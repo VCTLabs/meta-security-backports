@@ -1,30 +1,23 @@
-From 23a224203a73688567f500380644e5cf30c8ed99 Mon Sep 17 00:00:00 2001
-From: Armin Kuster <akuster808@gmail.com>
-Date: Thu, 22 Jun 2023 06:19:26 -0400
-Subject: [PATCH] scap-security-guide: add Poky support
+From bda26905745bd3a13c62c9a88e9e997b5bab7e8f Mon Sep 17 00:00:00 2001
+From: Stephen L Arnold <sarnold@vctlabs.com>
+Date: Mon, 3 Jul 2023 21:40:51 -0700
+Subject: [PATCH 3/4] scap-security-guide: add Poky support (rebase from
+ meta-security)
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
-
-Upstream-Status: Pending
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
-
+Signed-off-by: Stephen L Arnold <sarnold@vctlabs.com>
 ---
- products/openembedded/product.yml             |  7 +++-
+ products/openembedded/product.yml             |  5 +++
  .../openembedded/transforms/constants.xslt    |  4 +--
  shared/checks/oval/installed_OS_is_poky.xml   | 33 +++++++++++++++++++
- 3 files changed, 41 insertions(+), 3 deletions(-)
+ 3 files changed, 40 insertions(+), 2 deletions(-)
  create mode 100644 shared/checks/oval/installed_OS_is_poky.xml
 
 diff --git a/products/openembedded/product.yml b/products/openembedded/product.yml
-index 9f2f12d737..a495e197c0 100644
+index debf6870ef..a495e197c0 100644
 --- a/products/openembedded/product.yml
 +++ b/products/openembedded/product.yml
-@@ -14,6 +14,11 @@ init_system: "systemd"
- cpes_root: "../../shared/applicability"
- cpes:
-   - openembedded:
--      name: "cpe:/o:openembedded"
-+      name: "cpe:/o:openembedded:nodistro:"
+@@ -17,3 +17,8 @@ cpes:
+       name: "cpe:/o:openembedded:nodistro:"
        title: "OpenEmbedded nodistro"
        check_id: installed_OS_is_openembedded
 +
@@ -33,15 +26,15 @@ index 9f2f12d737..a495e197c0 100644
 +      title: "OpenEmbedded Poky reference distribution"
 +      check_id: installed_OS_is_poky
 diff --git a/products/openembedded/transforms/constants.xslt b/products/openembedded/transforms/constants.xslt
-index 85e812a7c1..8901def2f9 100644
+index 152571e8bb..8901def2f9 100644
 --- a/products/openembedded/transforms/constants.xslt
 +++ b/products/openembedded/transforms/constants.xslt
 @@ -2,8 +2,8 @@
  
  <xsl:include href="../../../shared/transforms/shared_constants.xslt"/>
  
--<xsl:variable name="product_long_name">OpenEmbedded nodistro</xsl:variable>
--<xsl:variable name="product_short_name">OE nodistro</xsl:variable>
+-<xsl:variable name="product_long_name">OpenEmbedded</xsl:variable>
+-<xsl:variable name="product_short_name">openembedded</xsl:variable>
 +<xsl:variable name="product_long_name">OpenEmbedded based distribution</xsl:variable>
 +<xsl:variable name="product_short_name">OE distros</xsl:variable>
  <xsl:variable name="product_stig_id_name">empty</xsl:variable>
@@ -87,5 +80,5 @@ index 0000000000..9c41acd786
 +
 +</def-group>
 -- 
-2.34.1
+2.41.0
 

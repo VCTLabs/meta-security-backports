@@ -6,11 +6,12 @@ HOME_URL = "https://www.open-scap.org/security-policies/scap-security-guide/"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=9bfa86579213cb4c6adaffface6b2820"
 LICENSE = "BSD-3-Clause"
 
-SRCREV = "dad85502ce8da722a6afc391346c41cee61e90a9"
+SRCREV = "17bc12365f418a171921f9a3687524fa10cecde3"
 SRC_URI = "git://github.com/ComplianceAsCode/content.git;branch=master;protocol=https \
-           file://0001-scap-security-guide-add-openembedded.patch \
+           file://0001-scap-security-guide-add-openembedded-distro-support.patch \
+           file://0003-scap-security-guide-add-Poky-support-rebase-from-met.patch \
+           file://0004-scap-security-guide-add-Petalinux-support.patch \
            file://0001-standard.profile-expand-checks.patch \
-           file://0001-scap-security-guide-add-Poky-support.patch \
            file://run_eval.sh \
            "
 
