@@ -17,21 +17,23 @@ SRC_URI = "http://www.aleksey.com/xmlsec/download/${BP}.tar.gz \
     file://change-finding-path-of-nss.patch \
     file://makefile-ptest.patch \
     file://xmlsec1-examples-allow-build-in-separate-dir.patch \
+    file://0001-nss-nspr-fix-for-multilib.patch \
     file://run-ptest \
+    file://ensure-search-path-non-host.patch \
     "
 
-SRC_URI[md5sum] = "69b8d95c009a404462e19f335e650241"
-SRC_URI[sha256sum] = "13eec4811ea30e3f0e16a734d1dbf7f9d246a71d540b48d143a07b489f6222d4"
+SRC_URI[md5sum] = "b66ec21e0a0ac331afb4b1bc5c9ef966"
+SRC_URI[sha256sum] = "2d84360b03042178def1d9ff538acacaed2b3a27411db7b2874f1612ed71abc8"
 
 inherit autotools-brokensep ptest pkgconfig
 
-CFLAGS += "-I${STAGING_INCDIR}/nspr4 -I${STAGING_INCDIR}/nss3"
-CPPFLAGS += "-I${STAGING_INCDIR}/nspr4 -I${STAGING_INCDIR}/nss3"
+#CFLAGS += "-I${STAGING_INCDIR}/nss3"
+#CPPFLAGS += "-I${STAGING_INCDIR}/nss3"
 
 PACKAGECONFIG ??= "gnutls libgcrypt nss openssl des"
 PACKAGECONFIG[gnutls] = ",,gnutls"
 PACKAGECONFIG[libgcrypt] = ",,libgcrypt"
-PACKAGECONFIG[nss] = "--with-nss=${STAGING_LIBDIR}/../.. --with-nspr=${STAGING_LIBDIR}/../..,,nss nspr"
+PACKAGECONFIG[nss] = "--with-nss=${STAGING_DIR_HOST} --with-nspr=${STAGING_DIR_HOST},,nss nspr"
 PACKAGECONFIG[openssl] = ",,openssl"
 PACKAGECONFIG[des] = ",--disable-des,,"
 
