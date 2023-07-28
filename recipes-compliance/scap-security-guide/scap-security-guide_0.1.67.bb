@@ -12,6 +12,7 @@ SRC_URI = "git://github.com/ComplianceAsCode/content.git;branch=master;protocol=
            file://0002-scap-security-guide-add-Poky-support-rebase-from-met.patch \
            file://0003-scap-security-guide-add-Petalinux-support.patch \
            file://0004-standard.profile-expand-checks.patch \
+           file://0007-fix-rule-not-applicable-for-rules-checking-login-def.patch \
            file://run_eval.sh \
            "
 

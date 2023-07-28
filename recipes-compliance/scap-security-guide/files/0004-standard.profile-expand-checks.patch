@@ -1,7 +1,7 @@
-From 318f8269296aee8c899a0cb2d685982ad25e3d0a Mon Sep 17 00:00:00 2001
+From ede15a1e1ebbbf340323097c97c04fd928be4760 Mon Sep 17 00:00:00 2001
 From: Armin Kuster <akuster808@gmail.com>
 Date: Wed, 21 Jun 2023 07:46:38 -0400
-Subject: [PATCH 4/6] standard.profile: expand checks
+Subject: [PATCH 4/7] standard.profile: expand checks
 
 Upstream-Status: Pending
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
