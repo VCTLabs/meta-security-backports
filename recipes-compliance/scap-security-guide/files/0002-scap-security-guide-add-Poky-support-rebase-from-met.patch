@@ -1,7 +1,7 @@
-From bda26905745bd3a13c62c9a88e9e997b5bab7e8f Mon Sep 17 00:00:00 2001
+From 08694114b4e9ece86455edebdd9f95c75b70b780 Mon Sep 17 00:00:00 2001
 From: Stephen L Arnold <sarnold@vctlabs.com>
 Date: Mon, 3 Jul 2023 21:40:51 -0700
-Subject: [PATCH 3/4] scap-security-guide: add Poky support (rebase from
+Subject: [PATCH 2/6] scap-security-guide: add Poky support (rebase from
  meta-security)
 
 Signed-off-by: Stephen L Arnold <sarnold@vctlabs.com>
@@ -9,21 +9,23 @@ Signed-off-by: Stephen L Arnold <sarnold@vctlabs.com>
  products/openembedded/product.yml             |  5 +++
  .../openembedded/transforms/constants.xslt    |  4 +--
  shared/checks/oval/installed_OS_is_poky.xml   | 33 +++++++++++++++++++
- 3 files changed, 40 insertions(+), 2 deletions(-)
+ .../oval/sysctl_kernel_ipv6_disable.xml       |  6 ++--
+ ssg/constants.py                              |  3 +-
+ 5 files changed, 45 insertions(+), 6 deletions(-)
  create mode 100644 shared/checks/oval/installed_OS_is_poky.xml
 
 diff --git a/products/openembedded/product.yml b/products/openembedded/product.yml
-index debf6870ef..a495e197c0 100644
+index a1efb33116..dbe8eccf97 100644
 --- a/products/openembedded/product.yml
 +++ b/products/openembedded/product.yml
-@@ -17,3 +17,8 @@ cpes:
+@@ -18,3 +18,8 @@ cpes:
        name: "cpe:/o:openembedded:nodistro:"
        title: "OpenEmbedded nodistro"
        check_id: installed_OS_is_openembedded
 +
 +  - poky:
 +      name: "cpe:/o:openembedded:poky:"
-+      title: "OpenEmbedded Poky reference distribution"
++      title: "Poky reference distribution"
 +      check_id: installed_OS_is_poky
 diff --git a/products/openembedded/transforms/constants.xslt b/products/openembedded/transforms/constants.xslt
 index 152571e8bb..8901def2f9 100644
@@ -79,6 +81,50 @@ index 0000000000..9c41acd786
 +  </ind:textfilecontent54_object>
 +
 +</def-group>
+diff --git a/shared/checks/oval/sysctl_kernel_ipv6_disable.xml b/shared/checks/oval/sysctl_kernel_ipv6_disable.xml
+index 4f22df262c..0488ac75f8 100644
+--- a/shared/checks/oval/sysctl_kernel_ipv6_disable.xml
++++ b/shared/checks/oval/sysctl_kernel_ipv6_disable.xml
+@@ -8,15 +8,15 @@
+ 	<platform>multi_platform_debian</platform>
+ 	<platform>multi_platform_example</platform>
+ 	<platform>multi_platform_fedora</platform>
+-	<platform>multi_platform_openembedded</platform>
++	<platform>multi_platform_oe</platform>
+ 	<platform>multi_platform_opensuse</platform>
+ 	<platform>multi_platform_ol</platform>
+ 	<platform>multi_platform_rhcos</platform>
+ 	<platform>multi_platform_rhel</platform>
+ 	<platform>multi_platform_rhv</platform>
+ 	<platform>multi_platform_sle</platform>
+-    <platform>multi_platform_ubuntu</platform>
+-    <platform>multi_platform_uos</platform>
++	<platform>multi_platform_ubuntu</platform>
++	<platform>multi_platform_uos</platform>
+       </affected>
+       <description>Disables IPv6 for all network interfaces.</description>
+     </metadata>
+diff --git a/ssg/constants.py b/ssg/constants.py
+index 8a92eb6182..f4b9706f57 100644
+--- a/ssg/constants.py
++++ b/ssg/constants.py
+@@ -51,6 +51,7 @@ product_directories = [
+     'ocp4',
+     'rhcos4',
+     'ol7', 'ol8', 'ol9',
++    'openembedded',
+     'opensuse',
+     'rhel7', 'rhel8', 'rhel9',
+     'rhv4',
+@@ -288,7 +289,7 @@ MULTI_PLATFORM_MAPPING = {
+     "multi_platform_sle": ["sle12", "sle15"],
+     "multi_platform_ubuntu": ["ubuntu1604", "ubuntu1804", "ubuntu2004", "ubuntu2204"],
+     "multi_platform_uos": ["uos20"],
+-    "multi_platform_openembedded": ["openembedded"],
++    "multi_platform_oe": ["openembedded"],
+ }
+ 
+ RHEL_CENTOS_CPE_MAPPING = {
 -- 
 2.41.0
 

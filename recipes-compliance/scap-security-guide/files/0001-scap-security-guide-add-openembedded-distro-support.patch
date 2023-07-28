@@ -1,22 +1,26 @@
-From 826dd5b109f79270819703a23cc8066895d68042 Mon Sep 17 00:00:00 2001
+From d6e4face553d39859c772fb1f9dfb413844bd27e Mon Sep 17 00:00:00 2001
 From: Armin Kuster <akuster808@gmail.com>
 Date: Wed, 14 Jun 2023 07:46:55 -0400
-Subject: [PATCH 1/4] scap-security-guide: add openembedded distro support
+Subject: [PATCH 1/6] scap-security-guide: add openembedded distro support
 
 includes a standard profile for out-of-the-box checks
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
+
+[v3]
+Fix cmakelint error
+Switch product pkg_manager to apt_get
 ---
  CMakeLists.txt                                |   5 +
  build_product                                 |   1 +
  products/openembedded/CMakeLists.txt          |   6 +
- products/openembedded/product.yml             |  19 ++
+ products/openembedded/product.yml             |  20 +++
  .../openembedded/profiles/standard.profile    | 166 ++++++++++++++++++
  .../openembedded/transforms/constants.xslt    |  10 ++
  .../oval/installed_OS_is_openembedded.xml     |  33 ++++
  .../oval/sysctl_kernel_ipv6_disable.xml       |   1 +
  ssg/constants.py                              |   5 +-
- 9 files changed, 245 insertions(+), 1 deletion(-)
+ 9 files changed, 246 insertions(+), 1 deletion(-)
  create mode 100644 products/openembedded/CMakeLists.txt
  create mode 100644 products/openembedded/product.yml
  create mode 100644 products/openembedded/profiles/standard.profile
@@ -24,10 +28,10 @@ Signed-off-by: Armin Kuster <akuster808@gmail.com>
  create mode 100644 shared/checks/oval/installed_OS_is_openembedded.xml
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 6b1ac00ff9..e4191f2cef 100644
+index edc4873385..4968a81361 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -97,6 +97,7 @@ option(SSG_PRODUCT_UBUNTU1804 "If enabled, the Ubuntu 18.04 SCAP content will be
+@@ -98,6 +98,7 @@ option(SSG_PRODUCT_UBUNTU1804 "If enabled, the Ubuntu 18.04 SCAP content will be
  option(SSG_PRODUCT_UBUNTU2004 "If enabled, the Ubuntu 20.04 SCAP content will be built" ${SSG_PRODUCT_DEFAULT})
  option(SSG_PRODUCT_UBUNTU2204 "If enabled, the Ubuntu 22.04 SCAP content will be built" ${SSG_PRODUCT_DEFAULT})
  option(SSG_PRODUCT_UOS20 "If enabled, the Uos 20 SCAP content will be built" ${SSG_PRODUCT_DEFAULT})
@@ -35,7 +39,7 @@ index 6b1ac00ff9..e4191f2cef 100644
  
  
  option(SSG_CENTOS_DERIVATIVES_ENABLED "If enabled, CentOS derivative content will be built from the RHEL content" TRUE)
-@@ -291,6 +292,7 @@ message(STATUS "Ubuntu 18.04: ${SSG_PRODUCT_UBUNTU1804}")
+@@ -293,6 +294,7 @@ message(STATUS "Ubuntu 18.04: ${SSG_PRODUCT_UBUNTU1804}")
  message(STATUS "Ubuntu 20.04: ${SSG_PRODUCT_UBUNTU2004}")
  message(STATUS "Ubuntu 22.04: ${SSG_PRODUCT_UBUNTU2204}")
  message(STATUS "Uos 20: ${SSG_PRODUCT_UOS20}")
@@ -43,21 +47,21 @@ index 6b1ac00ff9..e4191f2cef 100644
  
  
  message(STATUS " ")
-@@ -409,6 +411,9 @@ endif()
+@@ -414,6 +416,9 @@ endif()
  if(SSG_PRODUCT_UOS20)
      add_subdirectory("products/uos20" "uos20")
  endif()
-+if (SSG_PRODUCT_OE)
++if(SSG_PRODUCT_OE)
 +    add_subdirectory("products/openembedded" "openembedded")
 +endif()
  
  # ZIP only contains source datastreams and kickstarts, people who
  # want sources to build from should get the tarball instead.
 diff --git a/build_product b/build_product
-index fc793cbe70..7bdc03edfe 100755
+index ba8fb5d681..e60e9de15e 100755
 --- a/build_product
 +++ b/build_product
-@@ -333,6 +333,7 @@ all_cmake_products=(
+@@ -334,6 +334,7 @@ all_cmake_products=(
  	UBUNTU2204
  	UOS20
  	MACOS1015
@@ -67,24 +71,24 @@ index fc793cbe70..7bdc03edfe 100755
  DEFAULT_OVAL_MAJOR_VERSION=5
 diff --git a/products/openembedded/CMakeLists.txt b/products/openembedded/CMakeLists.txt
 new file mode 100644
-index 0000000000..1981adf53e
+index 0000000000..363eedbced
 --- /dev/null
 +++ b/products/openembedded/CMakeLists.txt
 @@ -0,0 +1,6 @@
 +# Sometimes our users will try to do: "cd openembedded; cmake ." That needs to error in a nice way.
-+if ("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
++if("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
 +    message(FATAL_ERROR "cmake has to be used on the root CMakeLists.txt, see the Building ComplianceAsCode section in the Developer Guide!")
 +endif()
 +
 +ssg_build_product("openembedded")
 diff --git a/products/openembedded/product.yml b/products/openembedded/product.yml
 new file mode 100644
-index 0000000000..debf6870ef
+index 0000000000..a1efb33116
 --- /dev/null
 +++ b/products/openembedded/product.yml
-@@ -0,0 +1,19 @@
+@@ -0,0 +1,20 @@
 +product: openembedded
-+full_name: OpemEmbedded 
++full_name: OpemEmbedded
 +type: platform
 +
 +benchmark_id: OPENEMBEDDED
@@ -92,7 +96,8 @@ index 0000000000..debf6870ef
 +
 +profiles_root: "./profiles"
 +
-+pkg_manager: "dnf"
++pkg_manager: "apt_get"
++pkg_manager_config_file: "/etc/apt/apt.conf"
 +
 +init_system: "systemd"
 +
@@ -342,10 +347,10 @@ index affb9770cb..4f22df262c 100644
  	<platform>multi_platform_ol</platform>
  	<platform>multi_platform_rhcos</platform>
 diff --git a/ssg/constants.py b/ssg/constants.py
-index f66ba008fa..630fbdfcb9 100644
+index 4df109bd19..8a92eb6182 100644
 --- a/ssg/constants.py
 +++ b/ssg/constants.py
-@@ -219,6 +219,7 @@ FULL_NAME_TO_PRODUCT_MAPPING = {
+@@ -221,6 +221,7 @@ FULL_NAME_TO_PRODUCT_MAPPING = {
      "Ubuntu 20.04": "ubuntu2004",
      "Ubuntu 22.04": "ubuntu2204",
      "UnionTech OS Server 20": "uos20",
@@ -353,7 +358,7 @@ index f66ba008fa..630fbdfcb9 100644
      "Not Applicable" : "example"
  }
  
-@@ -267,7 +268,7 @@ REFERENCES = dict(
+@@ -269,7 +270,7 @@ REFERENCES = dict(
  
  MULTI_PLATFORM_LIST = ["rhel", "fedora", "rhv", "debian", "ubuntu",
                         "opensuse", "sle", "ol", "ocp", "rhcos",
@@ -362,7 +367,7 @@ index f66ba008fa..630fbdfcb9 100644
  
  MULTI_PLATFORM_MAPPING = {
      "multi_platform_alinux": ["alinux2", "alinux3"],
-@@ -285,6 +286,7 @@ MULTI_PLATFORM_MAPPING = {
+@@ -287,6 +288,7 @@ MULTI_PLATFORM_MAPPING = {
      "multi_platform_sle": ["sle12", "sle15"],
      "multi_platform_ubuntu": ["ubuntu1604", "ubuntu1804", "ubuntu2004", "ubuntu2204"],
      "multi_platform_uos": ["uos20"],
@@ -370,7 +375,7 @@ index f66ba008fa..630fbdfcb9 100644
  }
  
  RHEL_CENTOS_CPE_MAPPING = {
-@@ -454,6 +456,7 @@ MAKEFILE_ID_TO_PRODUCT_MAP = {
+@@ -456,6 +458,7 @@ MAKEFILE_ID_TO_PRODUCT_MAP = {
      'ocp': 'Red Hat OpenShift Container Platform',
      'rhcos': 'Red Hat Enterprise Linux CoreOS',
      'eks': 'Amazon Elastic Kubernetes Service',

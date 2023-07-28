@@ -9,9 +9,9 @@ LICENSE = "BSD-3-Clause"
 SRCREV = "17bc12365f418a171921f9a3687524fa10cecde3"
 SRC_URI = "git://github.com/ComplianceAsCode/content.git;branch=master;protocol=https \
            file://0001-scap-security-guide-add-openembedded-distro-support.patch \
-           file://0003-scap-security-guide-add-Poky-support-rebase-from-met.patch \
-           file://0004-scap-security-guide-add-Petalinux-support.patch \
-           file://0001-standard.profile-expand-checks.patch \
+           file://0002-scap-security-guide-add-Poky-support-rebase-from-met.patch \
+           file://0003-scap-security-guide-add-Petalinux-support.patch \
+           file://0004-standard.profile-expand-checks.patch \
            file://run_eval.sh \
            "
 

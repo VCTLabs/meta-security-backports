@@ -1,7 +1,7 @@
-From 66f145e06d008ad33e827f7a9d67909f16ebb882 Mon Sep 17 00:00:00 2001
+From 177566e1744845553ccd08df32207c3bd17871a3 Mon Sep 17 00:00:00 2001
 From: Stephen L Arnold <sarnold@vctlabs.com>
 Date: Wed, 5 Jul 2023 14:39:33 -0700
-Subject: [PATCH 4/4] scap-security-guide: add Petalinux support
+Subject: [PATCH 3/6] scap-security-guide: add Petalinux support
 
 Signed-off-by: Stephen L Arnold <sarnold@vctlabs.com>
 ---
@@ -11,12 +11,12 @@ Signed-off-by: Stephen L Arnold <sarnold@vctlabs.com>
  create mode 100644 shared/checks/oval/installed_OS_is_petalinux.xml
 
 diff --git a/products/openembedded/product.yml b/products/openembedded/product.yml
-index a495e197c0..4662861274 100644
+index dbe8eccf97..76450c49ac 100644
 --- a/products/openembedded/product.yml
 +++ b/products/openembedded/product.yml
-@@ -22,3 +22,8 @@ cpes:
+@@ -23,3 +23,8 @@ cpes:
        name: "cpe:/o:openembedded:poky:"
-       title: "OpenEmbedded Poky reference distribution"
+       title: "Poky reference distribution"
        check_id: installed_OS_is_poky
 +
 +  - petalinux:
