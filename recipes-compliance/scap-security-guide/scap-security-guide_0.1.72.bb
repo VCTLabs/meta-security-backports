@@ -7,16 +7,16 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9bfa86579213cb4c6adaffface6b2820"
 LICENSE = "BSD-3-Clause"
 
 # increment this for patch changes!!
-PR = "r1"
+PR = "r2"
 
 SRCREV = "7fb44f78bf33232aad587e87a799afcf576f9b47"
 SRC_URI = "git://github.com/ComplianceAsCode/content.git;branch=stable;protocol=https \
            file://0001-scap-security-guide-add-Petalinux-support.patch \
            file://0002-standard.profile-expand-checks.patch \
            file://0003-remove-3-conflicting-checks-from-standard-profile.patch \
+           file://0007-fix-rule-not-applicable-for-rules-checking-login-def.patch \
            file://run_eval.sh \
            "
-
 
 DEPENDS = "openscap-native python3-pyyaml-native python3-jinja2-native libxml2-native expat-native coreutils-native"
 
