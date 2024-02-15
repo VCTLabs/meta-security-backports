@@ -6,12 +6,11 @@ HOME_URL = "https://www.open-scap.org/security-policies/scap-security-guide/"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=9bfa86579213cb4c6adaffface6b2820"
 LICENSE = "BSD-3-Clause"
 
-SRCREV = "17bc12365f418a171921f9a3687524fa10cecde3"
-SRC_URI = "git://github.com/ComplianceAsCode/content.git;branch=master;protocol=https \
-           file://0001-scap-security-guide-add-openembedded-distro-support.patch \
-           file://0002-scap-security-guide-add-Poky-support-rebase-from-met.patch \
-           file://0003-scap-security-guide-add-Petalinux-support.patch \
-           file://0004-standard.profile-expand-checks.patch \
+SRCREV = "7fb44f78bf33232aad587e87a799afcf576f9b47"
+SRC_URI = "git://github.com/ComplianceAsCode/content.git;branch=stable;protocol=https \
+           file://0001-scap-security-guide-add-Petalinux-support.patch \
+           file://0002-standard.profile-expand-checks.patch \
+           file://0003-remove-3-conflicting-checks-from-standard-profile.patch \
            file://0007-fix-rule-not-applicable-for-rules-checking-login-def.patch \
            file://run_eval.sh \
            "
