@@ -9,8 +9,8 @@ LICENSE = "LGPL-2.1"
 DEPENDS = "dbus acl bzip2 pkgconfig gconf procps curl libxml2 libxslt libcap swig libpcre  xmlsec1"
 DEPENDS_class-native = "pkgconfig-native swig-native curl-native libxml2-native libxslt-native libcap-native libpcre-native xmlsec1-native"
 
-#Jun 22th, 2023
-SRCREV = "a81c66d9bc36612dd1ca83a8c959a59e172eb4b9"
+#Feb 14 2024 - still no 1.3.10 yet
+SRCREV = "9b3e7563575f7e5b419f8a09999b40f30e3e7c29"
 SRC_URI = "git://github.com/OpenSCAP/openscap.git;branch=maint-1.3;protocol=https \
            "
 
