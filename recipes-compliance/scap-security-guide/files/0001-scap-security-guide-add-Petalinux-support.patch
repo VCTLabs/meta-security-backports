@@ -1,19 +1,26 @@
-From 7fbd93f5f9b4935182d10444b6412ae4293ca014 Mon Sep 17 00:00:00 2001
-From: Stephen L Arnold <sarnold@vctlabs.com>
-Date: Wed, 5 Jul 2023 14:39:33 -0700
-Subject: [PATCH 1/5] scap-security-guide: add Petalinux support
+From 7e8f19a7fbcac495d653fae5e95dfa58db71ef71 Mon Sep 17 00:00:00 2001
+From: Steve Arnold <sarnold@vctlabs.com>
+Date: Sat, 17 Feb 2024 19:18:37 -0800
+Subject: [PATCH] scap-security-guide: add Petalinux support
 
-Signed-off-by: Stephen L Arnold <sarnold@vctlabs.com>
+Signed-off-by: Steve Arnold <sarnold@vctlabs.com>
 ---
- products/openembedded/product.yml             |  5 +++
+ products/openembedded/product.yml             |  7 +++-
  .../checks/oval/installed_OS_is_petalinux.xml | 33 +++++++++++++++++++
- 2 files changed, 38 insertions(+)
+ 2 files changed, 39 insertions(+), 1 deletion(-)
  create mode 100644 shared/checks/oval/installed_OS_is_petalinux.xml
 
 diff --git a/products/openembedded/product.yml b/products/openembedded/product.yml
-index 1a7b4a0ec4..2f3c24f512 100644
+index 1a7b4a0ec4..fc908ee89d 100644
 --- a/products/openembedded/product.yml
 +++ b/products/openembedded/product.yml
+@@ -1,5 +1,5 @@
+ product: openembedded
+-full_name: OpenEmbedded 
++full_name: OpenEmbedded
+ type: platform
+ 
+ benchmark_id: OPENEMBEDDED
 @@ -22,3 +22,8 @@ cpes:
        name: "cpe:/o:openembedded:poky:"
        title: "OpenEmbedded Poky reference distribution"
@@ -21,11 +28,11 @@ index 1a7b4a0ec4..2f3c24f512 100644
 +
 +  - petalinux:
 +      name: "cpe:/o:openembedded:petalinux:"
-+      title: "Xilinx petalinux distribution"
++      title: "OpenEmbedded petalinux distribution"
 +      check_id: installed_OS_is_petalinux
 diff --git a/shared/checks/oval/installed_OS_is_petalinux.xml b/shared/checks/oval/installed_OS_is_petalinux.xml
 new file mode 100644
-index 0000000000..900b133d10
+index 0000000000..ccb03c36ce
 --- /dev/null
 +++ b/shared/checks/oval/installed_OS_is_petalinux.xml
 @@ -0,0 +1,33 @@
@@ -36,19 +43,19 @@ index 0000000000..900b133d10
 +      <affected family="unix">
 +        <platform>multi_platform_all</platform>
 +      </affected>
-+      <description>The operating system installed is a Xilinx Petalinux based System</description>
++      <description>The operating system installed is a Petalinux based System</description>
 +    </metadata>
-+    <criteria comment="System is Petalinux release distribution" operator="AND">
++    <criteria comment="System is Petalinux based distribution" operator="AND">
 +      <extend_definition comment="Installed OS is part of the Unix family" definition_ref="installed_OS_is_part_of_Unix_family" />
-+      <criterion comment="Petalinux distro" test_ref="test_os_release_petalinux" />
-+      <criterion comment="Petalinux release distribution is installed" test_ref="test_petalinux" />
++      <criterion comment="Petalinux based distro" test_ref="test_os_petalinux" />
++      <criterion comment="Petalinux based distribution is installed" test_ref="test_petalinux" />
 +    </criteria>
 +  </definition>
 +
-+  <unix:file_test check="all" check_existence="all_exist" comment="/etc/os-release exists" id="test_os_release_petalinux" version="1">
-+    <unix:object object_ref="obj_os_release_petalinux" />
++  <unix:file_test check="all" check_existence="all_exist" comment="/etc/os-release exists" id="test_os_petalinux" version="1">
++    <unix:object object_ref="obj_os_petalinux" />
 +  </unix:file_test>
-+  <unix:file_object comment="check /etc/os-release file" id="obj_os_release_petalinux" version="1">
++  <unix:file_object comment="check /etc/os-release file" id="obj_os_petalinux" version="1">
 +    <unix:filepath>/etc/os-release</unix:filepath>
 +  </unix:file_object>
 +
@@ -57,7 +64,7 @@ index 0000000000..900b133d10
 +  </ind:textfilecontent54_test>
 +  <ind:textfilecontent54_object id="obj_petalinux" version="1" comment="Check Petalinux">
 +    <ind:filepath>/etc/os-release</ind:filepath>
-+    <ind:pattern operation="pattern match">^ID=petalinux$</ind:pattern>
++    <ind:pattern operation="pattern match">^ID=&quot;petalinux&quot;$</ind:pattern>
 +    <ind:instance datatype="int">1</ind:instance>
 +  </ind:textfilecontent54_object>
 +
