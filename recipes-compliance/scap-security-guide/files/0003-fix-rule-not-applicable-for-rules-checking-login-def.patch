@@ -1,7 +1,7 @@
-From 42c8d9ee63dab255ee3475981777a270e6699c76 Mon Sep 17 00:00:00 2001
+From 9403114f0616b15a2d97bfb89e82c4f774bf3392 Mon Sep 17 00:00:00 2001
 From: Stephen L Arnold <sarnold@vctlabs.com>
 Date: Thu, 27 Jul 2023 21:25:29 -0700
-Subject: [PATCH 3/3] fix rule not applicable for rules checking login-defs
+Subject: [PATCH 3/4] fix rule not applicable for rules checking login-defs
 
 * start collecting package name overrdies in package.yml
 

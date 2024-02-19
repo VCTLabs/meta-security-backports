@@ -1,7 +1,7 @@
-From 40c9bce93e54794ed2d485f50069ce5204afd97a Mon Sep 17 00:00:00 2001
+From 280e318e5921ab40e5c74edfe4c9ebc9c98d3bdd Mon Sep 17 00:00:00 2001
 From: Steve Arnold <sarnold@vctlabs.com>
 Date: Sat, 17 Feb 2024 19:32:36 -0800
-Subject: [PATCH 2/3] chg: dev: add expanded profile checks as new profile
+Subject: [PATCH 2/4] chg: dev: add expanded profile checks as new profile
 
 * leave standard profile as-is and make a new profile based on upstream
   commit.

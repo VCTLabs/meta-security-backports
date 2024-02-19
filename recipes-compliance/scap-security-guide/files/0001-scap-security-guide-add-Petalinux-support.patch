@@ -1,7 +1,7 @@
 From 7e8f19a7fbcac495d653fae5e95dfa58db71ef71 Mon Sep 17 00:00:00 2001
 From: Steve Arnold <sarnold@vctlabs.com>
 Date: Sat, 17 Feb 2024 19:18:37 -0800
-Subject: [PATCH] scap-security-guide: add Petalinux support
+Subject: [PATCH 1/4] scap-security-guide: add Petalinux support
 
 Signed-off-by: Steve Arnold <sarnold@vctlabs.com>
 ---
