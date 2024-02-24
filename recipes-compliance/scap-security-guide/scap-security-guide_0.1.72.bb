@@ -15,6 +15,7 @@ SRC_URI = "git://github.com/ComplianceAsCode/content.git;branch=stable;protocol=
            file://0002-chg-dev-add-expanded-profile-checks-as-new-profile.patch \
            file://0003-fix-rule-not-applicable-for-rules-checking-login-def.patch \
            file://0004-fix-dev-remove-crypto_policy-rules-from-standard-pro.patch \
+           file://0005-add-support-for-OE-product-variant-harden-distro.patch \
            file://run_eval.sh \
            "
 
