@@ -1,3 +1,6 @@
+*.wic
+*.bz2
+*.xz
 *.pyc
 *.pyo
 /*.patch
