@@ -1,5 +1,7 @@
 SUMMARY = "A small image for an example of hardening OE."
 
+require harden-image-compliance.inc
+
 IMAGE_INSTALL = "packagegroup-core-boot packagegroup-hardening"
 IMAGE_INSTALL_append = " os-release"
 
