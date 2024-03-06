@@ -7,16 +7,18 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9bfa86579213cb4c6adaffface6b2820"
 LICENSE = "BSD-3-Clause"
 
 # increment this for patch changes!!
-PR = "r4"
+PR = "r6"
 
 SRCREV = "7fb44f78bf33232aad587e87a799afcf576f9b47"
 SRC_URI = "git://github.com/ComplianceAsCode/content.git;branch=stable;protocol=https \
-           file://0001-scap-security-guide-add-Petalinux-support.patch \
-           file://0002-chg-dev-add-expanded-profile-checks-as-new-profile.patch \
-           file://0003-fix-rule-not-applicable-for-rules-checking-login-def.patch \
-           file://0004-fix-dev-remove-crypto_policy-rules-from-standard-pro.patch \
+           file://0001-openembedded-profile-cleanup-add-expanded-profile.patch \
+           file://0001-swap-bash-umask-rules-from-default-to-align-with-min.patch \
+           file://0002-fix-rule-not-applicable-for-rules-checking-login-def.patch \
+           file://0005-scap-security-guide-add-Petalinux-support.patch \
+           file://0006-add-support-for-OE-product-variant-harden-distro-fro.patch \
            file://run_eval.sh \
            "
+
 
 DEPENDS = "openscap-native python3-pyyaml-native python3-jinja2-native libxml2-native expat-native coreutils-native"
 

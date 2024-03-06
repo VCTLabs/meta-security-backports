@@ -1,0 +1,29 @@
+From b6da582d419427663dc5c53f62d8bad192bf772a Mon Sep 17 00:00:00 2001
+From: Stephen L Arnold <sarnold@vctlabs.com>
+Date: Thu, 27 Jul 2023 21:25:29 -0700
+Subject: [PATCH 2/6] fix rule not applicable for rules checking login-defs
+
+* start collecting package name overrdies in package.yml
+
+Signed-off-by: Stephen L Arnold <sarnold@vctlabs.com>
+---
+ shared/applicability/package.yml | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/shared/applicability/package.yml b/shared/applicability/package.yml
+index add4425fff..494b52c8ef 100644
+--- a/shared/applicability/package.yml
++++ b/shared/applicability/package.yml
+@@ -86,6 +86,9 @@ args:
+     {{% else %}}
+       pkgname: shadow-utils
+     {{% endif %}}
++    {{% if product in ["openembedded"] %}}
++      pkgname: shadow-base
++    {{% endif %}}
+     {{% else %}}
+       pkgname: login
+     {{% endif %}}
+-- 
+2.43.0
+
