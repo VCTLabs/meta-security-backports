@@ -1,7 +1,7 @@
-From 737ec0a92e4a77f8a267ed3afbf4040f952e688f Mon Sep 17 00:00:00 2001
+From 2bf4aa8e6a3f4e4be9f54b1fec392db3cbaedb43 Mon Sep 17 00:00:00 2001
 From: Steve Arnold <sarnold@vctlabs.com>
 Date: Fri, 23 Feb 2024 16:02:08 -0800
-Subject: [PATCH] add support for OE product variant "harden" distro from
+Subject: [PATCH 6/6] add support for OE product variant "harden" distro from
  meta-hardening
 
 Signed-off-by: Steve Arnold <sarnold@vctlabs.com>

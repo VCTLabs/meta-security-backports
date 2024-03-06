@@ -1,7 +1,7 @@
-From f8e5e0a92c52ec83135d6799f8f6b55537eca376 Mon Sep 17 00:00:00 2001
+From 0053df479b0c8a3f27df38295610731fd4c73e08 Mon Sep 17 00:00:00 2001
 From: Steve Arnold <sarnold@vctlabs.com>
 Date: Sat, 17 Feb 2024 19:18:37 -0800
-Subject: [PATCH 1/4] scap-security-guide: add Petalinux support
+Subject: [PATCH 5/6] scap-security-guide: add Petalinux support
 
 Signed-off-by: Steve Arnold <sarnold@vctlabs.com>
 ---
@@ -32,7 +32,7 @@ index 1a7b4a0ec4..fc908ee89d 100644
 +      check_id: installed_OS_is_petalinux
 diff --git a/shared/checks/oval/installed_OS_is_petalinux.xml b/shared/checks/oval/installed_OS_is_petalinux.xml
 new file mode 100644
-index 0000000000..a4220d6f36
+index 0000000000..ccb03c36ce
 --- /dev/null
 +++ b/shared/checks/oval/installed_OS_is_petalinux.xml
 @@ -0,0 +1,33 @@
@@ -64,7 +64,7 @@ index 0000000000..a4220d6f36
 +  </ind:textfilecontent54_test>
 +  <ind:textfilecontent54_object id="obj_petalinux" version="1" comment="Check Petalinux">
 +    <ind:filepath>/etc/os-release</ind:filepath>
-+    <ind:pattern operation="pattern match">^ID=petalinux$</ind:pattern>
++    <ind:pattern operation="pattern match">^ID=&quot;petalinux&quot;$</ind:pattern>
 +    <ind:instance datatype="int">1</ind:instance>
 +  </ind:textfilecontent54_object>
 +

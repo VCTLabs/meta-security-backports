@@ -1,20 +1,23 @@
-From 280e318e5921ab40e5c74edfe4c9ebc9c98d3bdd Mon Sep 17 00:00:00 2001
+From 156973b169e53535193af63259c870f62187ad60 Mon Sep 17 00:00:00 2001
 From: Steve Arnold <sarnold@vctlabs.com>
-Date: Sat, 17 Feb 2024 19:32:36 -0800
-Subject: [PATCH 2/4] chg: dev: add expanded profile checks as new profile
+Date: Tue, 5 Mar 2024 15:27:36 -0800
+Subject: [PATCH 1/6] openembedded profile cleanup, add expanded profile
 
-* leave standard profile as-is and make a new profile based on upstream
-  commit.
+* remove duplicate selector and crypto-policy rules from standard profile
+* add expanded profile with crypto-policy and more network rules
+
+Note there are no crypto-policy recipes in available bitbake layers yet.
 
 Signed-off-by: Steve Arnold <sarnold@vctlabs.com>
 ---
  .../openembedded/profiles/expanded.profile    | 215 ++++++++++++++++++
- 1 file changed, 215 insertions(+)
+ .../openembedded/profiles/standard.profile    |   4 +-
+ 2 files changed, 216 insertions(+), 3 deletions(-)
  create mode 100644 products/openembedded/profiles/expanded.profile
 
 diff --git a/products/openembedded/profiles/expanded.profile b/products/openembedded/profiles/expanded.profile
 new file mode 100644
-index 0000000000..08ce2b6c02
+index 0000000000..abecab8ab8
 --- /dev/null
 +++ b/products/openembedded/profiles/expanded.profile
 @@ -0,0 +1,215 @@
@@ -131,7 +134,7 @@ index 0000000000..08ce2b6c02
 +    - service_smb_disabled
 +    - service_dovecot_disabled
 +    - banner_etc_motd
-+    - login_banner_text=cis_banners
++    - motd_banner_text=cis_banners
 +    - banner_etc_issue
 +    - login_banner_text=cis_banners
 +    - file_groupowner_etc_motd
@@ -233,6 +236,28 @@ index 0000000000..08ce2b6c02
 +    - package_firewalld_installed
 +    - service_firewalld_enabled
 +    - package_iptables_installed
+diff --git a/products/openembedded/profiles/standard.profile b/products/openembedded/profiles/standard.profile
+index 2d3a785647..117fca443e 100644
+--- a/products/openembedded/profiles/standard.profile
++++ b/products/openembedded/profiles/standard.profile
+@@ -106,7 +106,7 @@ selections:
+     - service_smb_disabled
+     - service_dovecot_disabled
+     - banner_etc_motd
+-    - login_banner_text=cis_banners
++    - motd_banner_text=cis_banners
+     - banner_etc_issue
+     - login_banner_text=cis_banners
+     - file_groupowner_etc_motd
+@@ -125,8 +125,6 @@ selections:
+     - require_singleuser_auth
+     - require_emergency_target_auth
+     - disable_users_coredumps
+-    - configure_crypto_policy
+-    - var_system_crypto_policy=default_policy
+     - dir_perms_world_writable_sticky_bits
+     - file_permissions_etc_passwd
+     - file_owner_etc_shadow
 -- 
 2.43.0
 
