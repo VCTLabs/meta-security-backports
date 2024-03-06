@@ -1,0 +1,55 @@
+From e0f74ae4993c393947be27511f7916e8e23e7bc2 Mon Sep 17 00:00:00 2001
+From: Steve Arnold <sarnold@vctlabs.com>
+Date: Tue, 5 Mar 2024 17:33:10 -0800
+Subject: [PATCH 1/2] swap bash umask rules from default to align with minimal
+ image installs
+
+Signed-off-by: Steve Arnold <sarnold@vctlabs.com>
+---
+ products/openembedded/profiles/default.profile  | 2 +-
+ products/openembedded/profiles/expanded.profile | 2 +-
+ products/openembedded/profiles/standard.profile | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/products/openembedded/profiles/default.profile b/products/openembedded/profiles/default.profile
+index 2cf76d8771..b29f4da689 100644
+--- a/products/openembedded/profiles/default.profile
++++ b/products/openembedded/profiles/default.profile
+@@ -83,7 +83,7 @@ selections:
+     - package_postfix_installed
+     - sysctl_kernel_kptr_restrict
+     - audit_privileged_commands_poweroff
+-    - accounts_umask_etc_profile
++    - accounts_umask_etc_bashrc
+     - audit_rules_file_deletion_events_unlink
+     - sudoers_no_root_target
+     - auditd_write_logs
+diff --git a/products/openembedded/profiles/expanded.profile b/products/openembedded/profiles/expanded.profile
+index abecab8ab8..13db15a953 100644
+--- a/products/openembedded/profiles/expanded.profile
++++ b/products/openembedded/profiles/expanded.profile
+@@ -87,7 +87,7 @@ selections:
+     - accounts_tmout
+     - var_accounts_tmout=15_min
+     - accounts_root_gid_zero
+-    - accounts_umask_etc_bashrc
++    - accounts_umask_etc_profile
+     - accounts_umask_etc_login_defs
+     - use_pam_wheel_for_su
+     - sshd_allow_only_protocol2
+diff --git a/products/openembedded/profiles/standard.profile b/products/openembedded/profiles/standard.profile
+index 117fca443e..37547a454e 100644
+--- a/products/openembedded/profiles/standard.profile
++++ b/products/openembedded/profiles/standard.profile
+@@ -83,7 +83,7 @@ selections:
+     - accounts_tmout
+     - var_accounts_tmout=15_min
+     - accounts_root_gid_zero
+-    - accounts_umask_etc_bashrc
++    - accounts_umask_etc_profile
+     - use_pam_wheel_for_su
+     - sshd_allow_only_protocol2
+     - journald_forward_to_syslog
+-- 
+2.43.0
+
