@@ -16,6 +16,7 @@ SRC_URI = "git://github.com/ComplianceAsCode/content.git;branch=stable;protocol=
            file://0002-fix-rule-not-applicable-for-rules-checking-login-def.patch \
            file://0005-scap-security-guide-add-Petalinux-support.patch \
            file://0006-add-support-for-OE-product-variant-harden-distro-fro.patch \
+           file://0001-openembedded-product-add-the-missing-table-transform.patch \
            file://run_eval.sh \
            "
 

@@ -1,0 +1,95 @@
+From be09b24b94074ecd5a807aa8b7ec3d889f8802e6 Mon Sep 17 00:00:00 2001
+From: Steve Arnold <sarnold@vctlabs.com>
+Date: Thu, 28 Mar 2024 09:31:28 -0700
+Subject: [PATCH] openembedded product: add the missing table transforms
+
+Signed-off-by: Steve Arnold <sarnold@vctlabs.com>
+---
+ products/openembedded/transforms/constants.xslt          | 7 +++++--
+ products/openembedded/transforms/table-style.xslt        | 5 +++++
+ .../transforms/xccdf-apply-overlay-stig.xslt             | 8 ++++++++
+ products/openembedded/transforms/xccdf2table-cce.xslt    | 9 +++++++++
+ .../transforms/xccdf2table-profileccirefs.xslt           | 9 +++++++++
+ 5 files changed, 36 insertions(+), 2 deletions(-)
+ create mode 100644 products/openembedded/transforms/table-style.xslt
+ create mode 100644 products/openembedded/transforms/xccdf-apply-overlay-stig.xslt
+ create mode 100644 products/openembedded/transforms/xccdf2table-cce.xslt
+ create mode 100644 products/openembedded/transforms/xccdf2table-profileccirefs.xslt
+
+diff --git a/products/openembedded/transforms/constants.xslt b/products/openembedded/transforms/constants.xslt
+index 152571e8bb..4789f08a18 100644
+--- a/products/openembedded/transforms/constants.xslt
++++ b/products/openembedded/transforms/constants.xslt
+@@ -2,9 +2,12 @@
+ 
+ <xsl:include href="../../../shared/transforms/shared_constants.xslt"/>
+ 
+-<xsl:variable name="product_long_name">OpenEmbedded</xsl:variable>
++<xsl:variable name="product_long_name">OpenEmbedded Linux</xsl:variable>
+ <xsl:variable name="product_short_name">openembedded</xsl:variable>
+-<xsl:variable name="product_stig_id_name">empty</xsl:variable>
++<xsl:variable name="product_stig_id_name">OE_NODISTRO_STIG</xsl:variable>
+ <xsl:variable name="prod_type">openembedded</xsl:variable>
+ 
++<!-- Define URI of official Center for Internet Security Benchmark for Distribution Independent Linux v2.0.0 -->
++<xsl:variable name="cisuri">https://www.cisecurity.org/benchmark/distribution_independent_linux/</xsl:variable>
++
+ </xsl:stylesheet>
+diff --git a/products/openembedded/transforms/table-style.xslt b/products/openembedded/transforms/table-style.xslt
+new file mode 100644
+index 0000000000..8b6caeab8c
+--- /dev/null
++++ b/products/openembedded/transforms/table-style.xslt
+@@ -0,0 +1,5 @@
++<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
++
++<xsl:import href="../../../shared/transforms/shared_table-style.xslt"/>
++
++</xsl:stylesheet>
+diff --git a/products/openembedded/transforms/xccdf-apply-overlay-stig.xslt b/products/openembedded/transforms/xccdf-apply-overlay-stig.xslt
+new file mode 100644
+index 0000000000..4789419b80
+--- /dev/null
++++ b/products/openembedded/transforms/xccdf-apply-overlay-stig.xslt
+@@ -0,0 +1,8 @@
++<?xml version="1.0"?>
++<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://checklists.nist.gov/xccdf/1.1" xmlns:xccdf="http://checklists.nist.gov/xccdf/1.1" xmlns:xhtml="http://www.w3.org/1999/xhtml" exclude-result-prefixes="xccdf">
++
++<xsl:include href="../../../shared/transforms/shared_xccdf-apply-overlay-stig.xslt"/>
++<xsl:include href="constants.xslt"/>
++<xsl:variable name="overlays" select="document($overlay)/xccdf:overlays" />
++
++</xsl:stylesheet>
+diff --git a/products/openembedded/transforms/xccdf2table-cce.xslt b/products/openembedded/transforms/xccdf2table-cce.xslt
+new file mode 100644
+index 0000000000..f156a66956
+--- /dev/null
++++ b/products/openembedded/transforms/xccdf2table-cce.xslt
+@@ -0,0 +1,9 @@
++<?xml version="1.0" encoding="utf-8" standalone="yes"?>
++<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:cce="http://cce.mitre.org" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cdf="http://checklists.nist.gov/xccdf/1.1" xmlns:xhtml="http://www.w3.org/1999/xhtml">
++
++<xsl:import href="../../../shared/transforms/shared_xccdf2table-cce.xslt"/>
++
++<xsl:include href="constants.xslt"/>
++<xsl:include href="table-style.xslt"/>
++
++</xsl:stylesheet>
+diff --git a/products/openembedded/transforms/xccdf2table-profileccirefs.xslt b/products/openembedded/transforms/xccdf2table-profileccirefs.xslt
+new file mode 100644
+index 0000000000..30419e92b2
+--- /dev/null
++++ b/products/openembedded/transforms/xccdf2table-profileccirefs.xslt
+@@ -0,0 +1,9 @@
++<?xml version="1.0" encoding="utf-8" standalone="yes"?>
++<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cdf="http://checklists.nist.gov/xccdf/1.1" xmlns:cci="https://public.cyber.mil/stigs/cci" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:ovalns="http://oval.mitre.org/XMLSchema/oval-definitions-5">
++
++<xsl:import href="../../../shared/transforms/shared_xccdf2table-profileccirefs.xslt"/>
++
++<xsl:include href="constants.xslt"/>
++<xsl:include href="table-style.xslt"/>
++
++</xsl:stylesheet>
+-- 
+2.44.0
+
