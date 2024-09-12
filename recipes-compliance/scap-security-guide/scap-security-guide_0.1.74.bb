@@ -9,7 +9,7 @@ LICENSE = "BSD-3-Clause"
 # increment this for patch changes!!
 PR = "r0"
 
-SRCREV = "7fb44f78bf33232aad587e87a799afcf576f9b47"
+SRCREV = "1bf21b05fa9581e8ca44e104e741e13fad3551ef"
 SRC_URI = "git://github.com/ComplianceAsCode/content.git;branch=stable;protocol=https \
            file://run_eval.sh \
            "
