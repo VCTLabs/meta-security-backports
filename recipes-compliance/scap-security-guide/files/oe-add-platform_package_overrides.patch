@@ -1,0 +1,42 @@
+From 3173361fd1c3b2903d59bae73d9eb9db3f421c6d Mon Sep 17 00:00:00 2001
+From: Stephen Arnold <nerdboy@gentoo.org>
+Date: Thu, 17 Oct 2024 17:19:12 -0700
+Subject: [PATCH] openembedded: add platform_package_overrides to product yaml
+
+* one is new, the other one is a move from shared applicability
+
+Signed-off-by: Stephen Arnold <nerdboy@gentoo.org>
+---
+ products/openembedded/product.yml | 4 ++++
+ shared/applicability/package.yml  | 3 ---
+ 2 files changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/products/openembedded/product.yml b/products/openembedded/product.yml
+index b98b5f1924..0fb538d461 100644
+--- a/products/openembedded/product.yml
++++ b/products/openembedded/product.yml
+@@ -32,3 +32,7 @@ cpes:
+       name: "cpe:/o:openembedded:harden:"
+       title: "OpenEmbedded Harden distribution"
+       check_id: installed_OS_is_oeharden
++
++platform_package_overrides:
++  pam: libpam-runtime
++  shadow-utils: shadow-base
+diff --git a/shared/applicability/package.yml b/shared/applicability/package.yml
+index 98988f1728..80f629b90e 100644
+--- a/shared/applicability/package.yml
++++ b/shared/applicability/package.yml
+@@ -94,9 +94,6 @@ args:
+     {{% else %}}
+       pkgname: shadow-utils
+     {{% endif %}}
+-    {{% if product in ["openembedded"] %}}
+-      pkgname: shadow-base
+-    {{% endif %}}
+     {{% else %}}
+       pkgname: login
+     {{% endif %}}
+-- 
+2.45.1
+
