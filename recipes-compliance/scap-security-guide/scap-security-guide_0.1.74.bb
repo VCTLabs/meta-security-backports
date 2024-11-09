@@ -34,18 +34,18 @@ EXTRA_OECMAKE += "-DENABLE_PYTHON_COVERAGE=OFF -DSSG_PRODUCT_DEFAULT=OFF -DSSG_P
 
 do_configure[depends] += "openscap-native:do_install"
 
-do_configure_prepend () {
+do_configure:prepend () {
     sed -i -e 's:NAMES\ sed:NAMES\ ${HOSTTOOLS_DIR}/sed:g' ${S}/CMakeLists.txt
     sed -i -e 's:NAMES\ grep:NAMES\ ${HOSTTOOLS_DIR}/grep:g' ${S}/CMakeLists.txt
 }
 
-do_install_append() {
+do_install:append() {
     install -d ${D}${datadir}/openscap
     install  ${WORKDIR}/run_eval.sh ${D}${datadir}/openscap/.
 }
 
-FILES_${PN} += "${datadir}/xml ${datadir}/openscap"
+FILES:${PN} += "${datadir}/xml ${datadir}/openscap"
 
-RDEPENDS_${PN} = "openscap"
+RDEPENDS:${PN} = "openscap"
 
-COMPATIBLE_HOST_libc-musl = "null"
+COMPATIBLE_HOST:libc-musl = "null"

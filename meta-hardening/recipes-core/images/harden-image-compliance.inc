@@ -7,4 +7,4 @@ set_sshd_config_perms () {
     fi
 }
 
-ROOTFS_POSTPROCESS_COMMAND_append = " set_sshd_config_perms;"
+ROOTFS_POSTPROCESS_COMMAND:append = " set_sshd_config_perms;"
