@@ -1,3 +1,4 @@
+# you need to inherit "cve-check"
 include conf/distro/include/cve-extra-exclusions.inc
 
 set_sshd_config_perms () {
