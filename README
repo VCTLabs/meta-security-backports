@@ -3,7 +3,8 @@ Meta-security-backports
 
 Select backports from meta-security master for testing/usage on older/LTS
 branches.  Nothing here should require/depend on meta-security or adding
-the following config options.
+the following config options BUT meta-security must be present in your
+build layers (enabling/setting is still optional).
 
 True for parent repo meta-security
 ----------------------------------
@@ -43,8 +44,8 @@ This layer depends on:
 Adding the security layer to your build
 ========================================
 
-In order to use this layer, you need to make the build system aware of
-it.
+In order to use the backports layer, you need to make the build system aware
+of it.
 
 Assuming the security layer exists at the top-level of your
 yocto build tree, you can add it to the build system by adding the
@@ -54,7 +55,9 @@ other layers needed. e.g.:
   BBLAYERS ?= " \
     /path/to/oe-core/meta \
     /path/to/meta-openembedded/meta-oe \
-    /path/to/layer/meta-security-backports "
+    /path/to/layer/meta-security \
+    /path/to/layer/meta-security-backports \
+  "
 
 Optional Dynamic layer dependancy
 =================================
@@ -70,7 +73,6 @@ Optional Dynamic layer dependancy
   BBLAYERS += "/path/to/layer/meta-openembedded/meta-python"
 
 This will activate the dynamic-layer mechanism.
-
 
 
 Maintenance
@@ -90,7 +92,10 @@ Now you can just do 'git send-email origin/master' to send all local patches.
 
 For pull requests, please use create-pull-request and send-pull-request. 
 
-Maintainers:    Armin Kuster <akuster808@gmail.com>
+Maintainers:
+
+* Armin Kuster <akuster808@gmail.com> (meta-security)
+* Stephen Arnold <nerdboy@gentoo.org> (meta-security-backports)
 
 
 License
