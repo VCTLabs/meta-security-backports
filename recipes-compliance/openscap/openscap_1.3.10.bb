@@ -16,7 +16,7 @@ SRC_URI = "git://github.com/OpenSCAP/openscap.git;branch=${BRANCH};protocol=http
 
 S = "${WORKDIR}/git"
 
-inherit cmake pkgconfig python3native perlnative systemd
+inherit cmake pkgconfig python3native python3targetconfig perlnative systemd
 
 PACKAGECONFIG ?= "python3 rpm perl gcrypt ${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)}"
 PACKAGECONFIG[python3] = "-DENABLE_PYTHON3=ON, ,python3, python3"
@@ -35,7 +35,9 @@ EXTRA_OECMAKE += "-DENABLE_PROBES_LINUX=ON -DENABLE_PROBES_UNIX=ON \
                   -DENABLE_PROBES_WINDOWS=OFF -DENABLE_VALGRIND=OFF \
                   -DENABLE_SCE=ON -DENABLE_MITRE=OFF -DENABLE_TESTS=OFF \
                   -DCMAKE_SKIP_INSTALL_RPATH=ON -DCMAKE_SKIP_RPATH=ON \
-                 "
+                  -DPREFERRED_PYTHON_PATH=${bindir}/python3 \
+                  -DPYTHON3_PATH=${bindir}/python3 \
+                  "
 
 STAGING_OSCAP_DIR = "${TMPDIR}/work-shared/${MACHINE}/oscap-source"
 STAGING_OSCAP_BUILDDIR = "${TMPDIR}/work-shared/openscap/oscap-build-artifacts"
