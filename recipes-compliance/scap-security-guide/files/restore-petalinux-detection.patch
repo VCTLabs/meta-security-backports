@@ -1,0 +1,27 @@
+From 4d4852d7e9bbd4c04ab04327ea2f5e955e96c053 Mon Sep 17 00:00:00 2001
+From: Stephen L Arnold <sarnold@vctlabs.com>
+Date: Wed, 4 Dec 2024 21:18:01 -0800
+Subject: [PATCH] fix: usr: restore petalinux detection, remove offending
+ embedded quotes
+
+Signed-off-by: Stephen L Arnold <sarnold@vctlabs.com>
+---
+ shared/checks/oval/installed_OS_is_petalinux.xml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/shared/checks/oval/installed_OS_is_petalinux.xml b/shared/checks/oval/installed_OS_is_petalinux.xml
+index ccb03c36ce..a4220d6f36 100644
+--- a/shared/checks/oval/installed_OS_is_petalinux.xml
++++ b/shared/checks/oval/installed_OS_is_petalinux.xml
+@@ -26,7 +26,7 @@
+   </ind:textfilecontent54_test>
+   <ind:textfilecontent54_object id="obj_petalinux" version="1" comment="Check Petalinux">
+     <ind:filepath>/etc/os-release</ind:filepath>
+-    <ind:pattern operation="pattern match">^ID=&quot;petalinux&quot;$</ind:pattern>
++    <ind:pattern operation="pattern match">^ID=petalinux$</ind:pattern>
+     <ind:instance datatype="int">1</ind:instance>
+   </ind:textfilecontent54_object>
+ 
+-- 
+2.47.0
+

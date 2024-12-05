@@ -7,11 +7,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9bfa86579213cb4c6adaffface6b2820"
 LICENSE = "BSD-3-Clause"
 
 # increment this for patch changes!!
-PR = "r0"
+PR = "r1"
 
 SRCREV = "1bf21b05fa9581e8ca44e104e741e13fad3551ef"
 SRC_URI = "git://github.com/ComplianceAsCode/content.git;branch=stable;protocol=https \
-           file://oe-add-platform_package_overrides.patch \
+           file://restore-petalinux-detection.patch \
            file://run_eval.sh \
            file://run-ptest \
            "
