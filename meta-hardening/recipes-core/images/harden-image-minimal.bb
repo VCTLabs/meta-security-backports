@@ -12,8 +12,8 @@ LICENSE = "MIT"
 
 IMAGE_ROOTFS_SIZE ?= "8192"
 
-inherit core-image
-IMAGE_CLASSES:append = " extrausers"
+inherit core-image extrausers
+#IMAGE_CLASSES:append = " extrausers"
 
 # user params no longer accept a plain-text passwd, so:
 #  openssl passwd -6 temppwd
